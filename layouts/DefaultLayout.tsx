@@ -1,15 +1,16 @@
 import React from 'react';
-import Main from '../components/Main';
+
 import SideBar from '../components/SideBar';
 
-const DefaultLayout = () => {
+interface Props {
+  children: React.ReactNode;
+}
+const DefaultLayout = ({ children }: Props) => {
   return (
     <div className="pt-[60px] flex w-full">
       <SideBar />
 
-      <div className="h-screen overflow-auto">
-        <Main />
-      </div>
+      <div className="w-full h-screen overflow-y-auto">{children}</div>
     </div>
   );
 };

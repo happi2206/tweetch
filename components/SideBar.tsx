@@ -8,8 +8,8 @@ const SideBar = () => {
   return (
     <div
       className={`relative   ${
-        visible ? 'w-72' : 'w-20'
-      } duration-500 h-screen overflow-auto p-2 bg-[#1F1F23]`}
+        visible ? 'w-64 min-w-[16rem]' : 'w-20'
+      } duration-500 h-screen overflow-y-auto p-2 bg-[#1F1F23]`}
     >
       <div className="mt-20">
         <div
@@ -33,9 +33,6 @@ const SideBar = () => {
             </Tooltip>
           </div>
         </div>
-        {/* <p className="justify-center w-full xl:hidden">
-          <Icon icon="bi:play-btn" />
-        </p> */}
       </div>
       {rec_channels.map((item, index) => (
         <div

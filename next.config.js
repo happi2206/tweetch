@@ -11,6 +11,8 @@ module.exports = {
       'lh3.googleusercontent.com',
       'robohash.org',
       'static-cdn.jtvnw.net',
+      'i.ytimg.com',
+      'yt3.ggpht.com',
     ],
   },
 };

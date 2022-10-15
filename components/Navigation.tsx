@@ -75,7 +75,9 @@ const Navigation = () => {
         ) : (
           <div className="flex items-center">
             <Link href="/account">
-              <Button>Account</Button>
+              <div>
+                <Button>Account</Button>
+              </div>
             </Link>
 
             <Image

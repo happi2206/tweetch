@@ -7,3 +7,16 @@
 html {
   @apply bg-[#0E0E10] text-white scroll-smooth;
 }
+
+.categoriestab {
+  @apply relative mt-20;
+  .inner {
+    @apply px-8 space-y-4;
+    h3 {
+      @apply text-6xl font-bold text-gray-200 capitalize;
+    }
+    p {
+      @apply font-semibold text-gray-400;
+    }
+  }
+}

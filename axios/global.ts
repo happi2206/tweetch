@@ -12,7 +12,7 @@ const options = {
   },
 };
 
-export const fetchVideos = async (url: string) => {
+export const fetchVideosFromApi = async (url: string) => {
   const { data } = await axios.get(`${BASE_URL}/${url}`, options);
 
   return data;
