@@ -13,11 +13,7 @@ const Games = () => {
       const vids = await fetchVideosFromApi(`search/?q=gaming&hl=en&gl=US`);
 
       console.log(vids);
-      //   vids.contents.map((vid: any) => {
-      //     //   setVideos(vids.contents);
-      //   });
       setVideos(vids.contents);
-      console.log(vidoes);
     } catch (err) {
       console.error(err);
     }
@@ -33,16 +29,15 @@ const Games = () => {
         and everything in between"
       />
       <CategoriesTab currentTab={router.pathname} />
-      <pre className="text-xs"> {JSON.stringify(vidoes[0]?.video)}</pre>
 
       <p className="px-8 pb-5 text-xl font-semibold">
         Recommended Gaming Streams
       </p>
 
-      <div className="grid grid-cols-4 px-8">
+      <div className="grid grid-cols-1 px-8 sm:grid-cols-2 md:grid-cols-4">
         {vidoes.map((video, index: number) => (
-          // <p key={index}>{JSON.stringify(video.video.title)}</p>
           <VideoPreview
+            id={video.video?.videoId}
             image={video.video?.thumbnails[0]?.url}
             title={video.video?.title}
             viewers={''}

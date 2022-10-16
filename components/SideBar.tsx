@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import Tooltip from './Tooltip';
 const SideBar = () => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   return (
     <div
       className={`relative   ${
@@ -25,10 +25,13 @@ const SideBar = () => {
             Recommended Channels
           </p>
 
-          <div className=" w-18" onClick={() => setVisible(!visible)}>
+          <div
+            className="hidden w-18 md:block"
+            onClick={() => setVisible(!visible)}
+          >
             <Tooltip content={<span>Expand</span>} direction="left">
               <span className="w-full text-white cursor-pointer">
-                <Icon icon="mdi:arrow-expand-left" />
+                <Icon icon={`mdi:arrow-expand-${visible ? 'left' : 'right'}`} />
               </span>
             </Tooltip>
           </div>

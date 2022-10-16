@@ -25,7 +25,7 @@ const Tooltip = (props: Props) => {
 
   return (
     <div
-      className={`${Tooltipstyle.Wrapper} w-full`}
+      className={`${Tooltipstyle.Wrapper} `}
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >

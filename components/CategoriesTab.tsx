@@ -37,8 +37,8 @@ const CategoriesTab = ({ currentTab }: { currentTab?: string }) => {
   ];
 
   return (
-    <div className="p-2 md:p-8">
-      <div className="grid gap-4 py-8 border-t border-gray-700 sm:grid-cols-3 lg:grid-cols-5">
+    <div className="px-8 md:p-8">
+      <div className="grid grid-cols-2 gap-4 py-8 border-t border-gray-700 sm:grid-cols-3 lg:grid-cols-5">
         {categories.map(
           (
             category: { image: StaticImageData; title: string; link: string },
@@ -52,7 +52,9 @@ const CategoriesTab = ({ currentTab }: { currentTab?: string }) => {
             >
               <Link href={category.link}>
                 <div className="flex items-center justify-between w-full">
-                  <p className="text-2xl font-bold">{category.title}</p>
+                  <h2 className="text-lg font-bold md:text-2xl">
+                    {category.title}
+                  </h2>
                   <Image src={category.image} alt="/" />
                 </div>
               </Link>

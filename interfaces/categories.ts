@@ -1,4 +1,5 @@
 export interface content {
+  videoId: string;
   title: string;
   thumbnails: { height: number; width: number; url: string }[];
   badges: string[];
@@ -8,4 +9,8 @@ export interface content {
 export type videointerface = {
   type: string;
   video: content;
+};
+
+export type videodetail = {
+  formats: { url: string };
 };
