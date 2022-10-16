@@ -4,9 +4,9 @@ import Spinner from './Spinner';
 type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  children: any;
+  children: React.ReactNode;
   outlineprimary?: boolean;
-  type?: any;
+  type?: 'button' | 'submit' | 'reset';
   isSubmitting?: boolean;
   rounded?: boolean;
   full?: boolean;
