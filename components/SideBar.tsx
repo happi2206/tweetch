@@ -43,7 +43,7 @@ const SideBar = () => {
           className="inline-flex justify-center items-center w-full py-[2px]"
         >
           <div>
-            <Image
+            <img
               src={item.avatar}
               width="30"
               height="30"

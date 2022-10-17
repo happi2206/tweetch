@@ -5,17 +5,20 @@ import CategoryHeader from '../../components/CategoryHeader';
 import { fetchVideosFromApi } from '../../axios/global';
 import { videointerface, content } from '../../interfaces/categories';
 import VideoPreview from '../../components/VideoPreview';
+import VideoSkeletonList from '../../components/VideoSkeletonList';
 const Games = () => {
   const router = useRouter();
   const [vidoes, setVideos] = useState<videointerface[]>([]);
+  const [fetching, setFetching] = useState(false);
   const fetchVideos = async () => {
+    setFetching(true);
     try {
       const vids = await fetchVideosFromApi(`search/?q=gaming&hl=en&gl=US`);
-
-      console.log(vids);
       setVideos(vids.contents);
+      setFetching(false);
     } catch (err) {
       console.error(err);
+      setFetching(false);
     }
   };
   useEffect(() => {
@@ -34,19 +37,25 @@ const Games = () => {
         Recommended Gaming Streams
       </p>
 
-      <div className="grid grid-cols-1 px-8 sm:grid-cols-2 md:grid-cols-4">
-        {vidoes.map((video, index: number) => (
-          <VideoPreview
-            id={video.video?.videoId}
-            image={video.video?.thumbnails[0]?.url}
-            title={video.video?.title}
-            viewers={''}
-            channelImage={video.video?.author?.avatar[0].url}
-            channelName={video.video?.author?.title}
-            tag1={''}
-            key={index}
-          />
-        ))}
+      <div className="grid grid-cols-1 gap-3 px-8 sm:grid-cols-2 md:grid-cols-4">
+        {fetching ? (
+          <VideoSkeletonList />
+        ) : (
+          <>
+            {vidoes.map((video, index: number) => (
+              <VideoPreview
+                id={video.video?.videoId}
+                image={video.video?.thumbnails[0]?.url}
+                title={video.video?.title}
+                viewers={''}
+                channelImage={video.video?.author?.avatar[0].url}
+                channelName={video.video?.author?.title}
+                tag1={''}
+                key={index}
+              />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

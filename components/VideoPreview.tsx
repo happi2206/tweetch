@@ -36,7 +36,7 @@ const VideoPreview = (props: Props) => {
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <Image
+                <img
                   src={props.channelImage}
                   alt="/"
                   width={20}

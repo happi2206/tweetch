@@ -9,9 +9,9 @@ interface Props {
 const StreamChat = ({ expandWidth, expanded }: Props) => {
   return (
     <div
-      className={`relative h-[97vh]  ${
+      className={`relative h-full  ${
         expanded ? 'w-96 min-w-[16rem]' : 'hidden'
-      } duration-500    overflow-y-scroll  bg-[#18181B] z-50`}
+      } duration-500 overflow-y-scroll  bg-[#18181B] z-50`}
     >
       <div className="flex items-center justify-between p-2 text-gray-200 border-b border-gray-400">
         <div
