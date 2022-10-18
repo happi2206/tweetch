@@ -1,17 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import Logo from '../public/assets/images/shinoby.webp';
-import { Menu, Transition } from '@headlessui/react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { Icon } from '@iconify/react';
 import { Button } from './Button';
 import SearchComponent from './SearchComponent';
 import MenuItems from './MenuItems';
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
 
 const Navigation = () => {
   const { data: session } = useSession();

@@ -29,7 +29,10 @@ const SideBar = () => {
             className="hidden w-18 md:block"
             onClick={() => setVisible(!visible)}
           >
-            <Tooltip content={<span>Expand</span>} direction="left">
+            <Tooltip
+              content={<span>{visible ? 'Collapse' : 'Expand'}</span>}
+              direction="left"
+            >
               <span className="w-full text-white cursor-pointer">
                 <Icon icon={`mdi:arrow-expand-${visible ? 'left' : 'right'}`} />
               </span>
@@ -43,13 +46,15 @@ const SideBar = () => {
           className="inline-flex justify-center items-center w-full py-[2px]"
         >
           <div>
-            <img
-              src={item.avatar}
-              width="30"
-              height="30"
-              alt="/"
-              className="rounded-[50%]"
-            />
+            {item.avatar && (
+              <Image
+                src={item.avatar}
+                width="30"
+                height="30"
+                alt="/"
+                className="rounded-[50%]"
+              />
+            )}
           </div>
           <div
             className={`justify-between ${visible ? 'flex' : 'hidden'} w-full`}

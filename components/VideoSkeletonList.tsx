@@ -1,11 +1,10 @@
 import React from 'react';
 import VideoSkeleton from './VideoSkeleton';
 
-const VideoSkeletonList = () => {
+const VideoSkeletonList = ({ shortlist }: { shortlist?: boolean }) => {
   return (
     <>
-      {' '}
-      {[...Array(25)].map((_i, index: number) => (
+      {[...Array(shortlist ? 4 : 25)].map((_i, index: number) => (
         <VideoSkeleton key={index} />
       ))}
     </>
