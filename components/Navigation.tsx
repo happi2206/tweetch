@@ -1,15 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../public/assets/images/shinoby.webp';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { Icon } from '@iconify/react';
 import { Button } from './Button';
 import SearchComponent from './SearchComponent';
 import MenuItems from './MenuItems';
+import AuthenticationModal from './AuthenticationModal';
 
 const Navigation = () => {
   const { data: session } = useSession();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#18181B] mb-[2px] z-10">
@@ -44,12 +47,17 @@ const Navigation = () => {
       <div className="flex items-center justify-end grow">
         {!session ? (
           <div className="flex items-center">
-            <span className="pr-3">
+            <span className="hidden pr-3 sm:block">
               <Icon icon="tabler:crown" color="white" width={22} />
             </span>
 
-            <Button secondary>Log In</Button>
-            <Button>Sign Up</Button>
+            <Button secondary onClick={() => setModalOpen(true)}>
+              Log In
+            </Button>
+
+            <div className="hidden sm:block">
+              <Button onClick={() => setModalOpen(true)}>Sign Up</Button>
+            </div>
 
             <MenuItems
               isRight
@@ -63,22 +71,27 @@ const Navigation = () => {
           </div>
         ) : (
           <div className="flex items-center">
-            <Link href="/account">
-              <div>
-                <Button>Account</Button>
-              </div>
-            </Link>
+            <div>
+              <Button onClick={() => signOut()}>Sign Out</Button>
+            </div>
 
-            <Image
+            <img
               src={session?.user?.image ? session.user.image : ''}
               width="35"
               height="35"
               className="rounded-full"
               alt="/"
             />
+
+            <p className="pl-3 text-sm"> {session?.user?.name}</p>
           </div>
         )}
       </div>
+
+      <AuthenticationModal
+        modalOpen={modalOpen}
+        closeModal={() => setModalOpen(!modalOpen)}
+      />
     </div>
   );
 };

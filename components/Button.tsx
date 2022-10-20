@@ -20,14 +20,17 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   secondary,
   isSubmitting,
+  full,
 }) => {
   return (
     <button
-      className={`px-3 py-1 rounded text-sm font-semibold  ${
+      className={`px-3 py-1 rounded text-sm ${
+        full && 'w-full'
+      } font-semibold  ${
         secondary
           ? 'bg-secondary dark:text-gray-200'
           : 'bg-primary dark:text-white'
-      }  mr-2 cursor-pointer 
+      }  mr-2 cursor-pointer  
       } 
        ${isSubmitting && 'cursor-not-allowed opacity-75'}`}
       disabled={isSubmitting}

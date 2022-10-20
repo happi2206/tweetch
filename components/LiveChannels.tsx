@@ -23,7 +23,7 @@ const LiveChannels = () => {
   }, []);
   return (
     <div className="px-8">
-      <h2 className="text-xl font-bold text-gray-200">
+      <h2 className="text-base font-bold text-gray-200 md:text-xl">
         Live Channels we think you&apos;ll like
       </h2>
 
