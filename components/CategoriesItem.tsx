@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   image: string;
@@ -12,6 +12,20 @@ interface Props {
 }
 
 const CategoriesItem = (props: Props) => {
+  const [color, setColor] = useState('');
+  const colors = ['red', 'green', 'yellow', 'blue'];
+  const rando = Math.floor(Math.random() * 3);
+  const temp = colors[rando];
+  console.log('tea,', temp);
+
+  // for (let i = 0; i < colors.length; i++) {
+  //   const tem = colors[rando];
+  //   console.log(tem);
+  //   console.log(color);
+  // }
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+  console.log(`#${randomColor}`);
   return (
     <Link href={`search/${props.title}`}>
       <div className="p-2 cursor-pointer ">
@@ -21,6 +35,7 @@ const CategoriesItem = (props: Props) => {
           height="350"
           alt="/"
           className="videopreview"
+          style={{ boxShadow: '' }}
         />
         <div>
           <p className="text-sm font-bold">{props.title}</p>

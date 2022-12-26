@@ -10,6 +10,8 @@ html {
 $colors: #772ce8, #f3f381, #488648, #6767bc, black, #ffc0cb;
 $repeat: 20;
 
+// $randomColor: floor($rand * ((16777215) + 1));
+
 .categoriestab {
   @apply relative mt-20;
   .inner {
@@ -27,8 +29,6 @@ $repeat: 20;
   transition: 0.5s;
   margin: 10px;
   box-shadow: 0 0 #772ce8;
-  @for $i from 0 to 20 {
-  }
   &:hover {
     box-shadow: -5px 5px #772ce8;
     transform: translate(5px, -5px);

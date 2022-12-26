@@ -42,7 +42,7 @@ const SignUp = () => {
 
         <div className="pt-4">
           <Button type="submit" full>
-            Log In
+            Sign Up
           </Button>
         </div>
       </form>

@@ -4,23 +4,12 @@ import { videointerface } from '../interfaces/categories';
 import VideoPreview from './VideoPreview';
 import VideoSkeletonList from './VideoSkeletonList';
 
-const LiveChannels = () => {
-  const [vidoes, setVideos] = useState<videointerface[]>([]);
-  const [fetching, setFetching] = useState(false);
-  const fetchVideos = async () => {
-    setFetching(true);
-    try {
-      const vids = await fetchVideosFromApi(`search/?q=live&hl=en&gl=US`);
-      setVideos(vids.contents.slice(0, 4));
-      setFetching(false);
-    } catch (err) {
-      console.error(err);
-      setFetching(false);
-    }
-  };
-  useEffect(() => {
-    fetchVideos();
-  }, []);
+interface Props {
+  fetching: boolean;
+  videos: videointerface[];
+}
+
+const LiveChannels = ({ fetching, videos }: Props) => {
   return (
     <div className="px-8">
       <h2 className="text-base font-bold text-gray-200 md:text-xl">
@@ -32,18 +21,19 @@ const LiveChannels = () => {
           <VideoSkeletonList shortlist />
         ) : (
           <>
-            {vidoes.map((video, index: number) => (
-              <VideoPreview
-                id={video.video?.videoId}
-                image={video.video?.thumbnails[0]?.url}
-                title={video.video?.title}
-                viewers={''}
-                channelImage={video.video?.author?.avatar[0].url}
-                channelName={video.video?.author?.title}
-                tag1={''}
-                key={index}
-              />
-            ))}
+            {videos &&
+              videos.map((video, index: number) => (
+                <VideoPreview
+                  id={video.video?.videoId}
+                  image={video.video?.thumbnails[0]?.url}
+                  title={video.video?.title}
+                  viewers={''}
+                  channelImage={video.video?.author?.avatar[0].url}
+                  channelName={video.video?.author?.title}
+                  tag1={''}
+                  key={index}
+                />
+              ))}
           </>
         )}
       </div>

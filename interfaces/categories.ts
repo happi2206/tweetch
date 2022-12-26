@@ -4,6 +4,7 @@ export interface content {
   thumbnails: { height: number; width: number; url: string }[];
   badges: string[];
   author: { avatar: { url: string }[]; title: string };
+  movingThumbnails: { height: number; width: number; url: string }[];
 }
 
 export type videointerface = {
