@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;800;900&display=swap');
 
 html {
-  @apply bg-[#0E0E10] text-white scroll-smooth;
+  @apply bg-[#0E0E10] text-gray-300 scroll-smooth;
 }
 $colors: #772ce8, #f3f381, #488648, #6767bc, black, #ffc0cb;
 $repeat: 20;
@@ -23,6 +23,10 @@ $repeat: 20;
       @apply font-semibold text-sm md:text-xl text-gray-400;
     }
   }
+}
+
+.tags {
+  @apply bg-[#363638] text-xs px-3 py-0.5 lowercase rounded-lg font-semibold;
 }
 
 .videopreview {

@@ -5,6 +5,7 @@ export interface content {
   badges: string[];
   author: { avatar: { url: string }[]; title: string };
   movingThumbnails: { height: number; width: number; url: string }[];
+  descriptionSnippet?: string;
 }
 
 export type videointerface = {

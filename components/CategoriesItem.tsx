@@ -42,17 +42,9 @@ const CategoriesItem = (props: Props) => {
           <p className="text-xs text-gray-500 py-[2px]">{props.viewers}</p>
           <div className="flex space-x-2">
             <div>
-              <p className="text-xs bg-gray-700 rounded-full inline-block p-[2px] px-3">
-                {props.tag1}
-              </p>
+              <p className="tags">{props.tag1}</p>
             </div>
-            <div>
-              {props.tag2 && (
-                <p className="text-xs bg-gray-700 rounded-full inline-block p-[2px] px-3">
-                  {props.tag2}
-                </p>
-              )}
-            </div>
+            <div>{props.tag2 && <p className="tags">{props.tag2}</p>}</div>
           </div>
         </div>
       </div>

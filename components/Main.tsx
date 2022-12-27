@@ -27,7 +27,7 @@ const Main = () => {
   return (
     <div className="relative">
       <VideoCarousel videos={videos} fetching={fetching} />
-      {/* <LiveChannels videos={videos} fetching={fetching} /> */}
+      <LiveChannels videos={videos.slice(0, 4)} fetching={fetching} />
       <CategoriesTab />
       <Categories />
     </div>
