@@ -11,11 +11,12 @@ interface Props {
   channelImage: string;
   channelName: string;
   id: string;
+  isLiveNow?: boolean;
 }
 
 const VideoPreview = (props: Props) => {
   return (
-    <div className="p-2 cursor-pointer ">
+    <div className="relative p-2 cursor-pointer">
       <Link href={`/video/${props.id}`}>
         <div>
           {props.image && (
@@ -26,6 +27,12 @@ const VideoPreview = (props: Props) => {
               height={200}
               className="object-cover videopreview"
             />
+          )}
+
+          {props.isLiveNow && (
+            <div className="absolute text-xs px-1 py-0.5 font-semibold bg-red-600 rounded top-4 text-white left-4">
+              <p className="uppercase"> Live</p>
+            </div>
           )}
 
           <p className="font-bold">{props.title}</p>

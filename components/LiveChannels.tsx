@@ -32,6 +32,7 @@ const LiveChannels = ({ fetching, videos }: Props) => {
                   channelName={video.video?.author?.title}
                   tag1={''}
                   key={index}
+                  isLiveNow={video.video?.isLiveNow}
                 />
               ))}
           </>

@@ -62,6 +62,7 @@ const SearchPage = () => {
                 channelName={video.video?.author?.title}
                 tag1={''}
                 key={index}
+                isLiveNow={video.video?.isLiveNow}
               />
             ))}
           </>

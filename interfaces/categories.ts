@@ -6,6 +6,8 @@ export interface content {
   author: { avatar: { url: string }[]; title: string };
   movingThumbnails: { height: number; width: number; url: string }[];
   descriptionSnippet?: string;
+  stats?: { viewers: string };
+  isLiveNow?: boolean;
 }
 
 export type videointerface = {

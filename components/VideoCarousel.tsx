@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import VideoSlider from './VideoSlider';
 import { videointerface } from '../interfaces/categories';
 import VideoSkeleton from './VideoSkeleton';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
+import LivePreview from './LivePreview';
 interface Props {
   fetching: boolean;
   videos: videointerface[];
 }
 const VideoCarousel = ({ fetching, videos }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState<any>();
 
   const getSlide = () => {};
+
+  const getViewerEstimate = (viewer: string | undefined) => {
+    if (viewer) {
+      const num = Number(viewer);
+      return Math.abs(num) > 999
+        ? Math.sign(num) * Number((Math.abs(num) / 1000).toFixed(1)) + 'k'
+        : Math.sign(num) * Math.abs(num);
+    }
+    return;
+  };
   useEffect(() => {
     console.log(videos);
   }, []);
@@ -23,62 +32,125 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
           <VideoSkeleton />
         ) : (
           <div className="flex justify-between w-full">
-            <span
-              className="flex items-center w-24 text-white cursor-pointer"
-              onClick={() => setCurrentIndex(currentIndex - 1)}
-            >
-              <Icon width={24} icon="material-symbols:chevron-left-rounded" />
-            </span>
-            <div className="flex">
-              <Image
-                src={
-                  videos[currentIndex]?.video?.movingThumbnails
-                    ? videos[currentIndex]?.video?.movingThumbnails[0].url
-                    : videos[currentIndex]?.video?.thumbnails[0].url
-                }
-                width={700}
-                height={300}
-                alt="hey"
-              />{' '}
-              {videos[currentIndex] && videos[currentIndex].video && (
-                <div className="p-5 bg-[#18181B]">
-                  {' '}
-                  <div className="flex items-start space-x-3 text-xs ">
-                    <Image
-                      src={videos[currentIndex]?.video?.author.avatar[0].url}
-                      alt={`channel`}
-                      width={40}
-                      height={40}
-                      className="rounded-full"
-                    />
+            <div className="flex items-center w-24">
+              {currentIndex !== 0 && (
+                <span
+                  className="text-white rounded-md cursor-pointer hover:bg-gray-500"
+                  onClick={() => setCurrentIndex(currentIndex - 1)}
+                >
+                  <Icon
+                    width={30}
+                    icon="material-symbols:chevron-left-rounded"
+                  />
+                </span>
+              )}
+            </div>
 
-                    <div className="w-20">
-                      <p className="font-semibold text-purple-400">
-                        {videos[currentIndex].video.author.title}
+            <div className="flex">
+              {currentIndex !== 0 && (
+                <div className="py-10">
+                  <LivePreview
+                    srcUrl={
+                      videos[currentIndex - 1]?.video?.movingThumbnails
+                        ? videos[currentIndex - 1]?.video?.movingThumbnails[0]
+                            .url
+                        : videos[currentIndex - 1]?.video?.thumbnails[0].url
+                    }
+                    alt={`${videos[currentIndex].video?.author.title} Channel`}
+                  />
+                </div>
+              )}
+              {/* <div>
+              {JSON.stringify(videos[currentIndex]?.video.stats?.viewers)}
+            </div> */}
+              <div className="relative flex">
+                <LivePreview
+                  srcUrl={
+                    videos[currentIndex]?.video?.movingThumbnails
+                      ? videos[currentIndex]?.video?.movingThumbnails[0].url
+                      : videos[currentIndex]?.video?.thumbnails[0].url
+                  }
+                  width={600}
+                  height={300}
+                  alt={`${videos[currentIndex].video?.author.title} Channel`}
+                />
+
+                {videos[currentIndex]?.video?.isLiveNow && (
+                  <div className="absolute text-xs px-1 py-0.5 font-semibold bg-red-600 rounded top-4 text-white left-4">
+                    <p className="uppercase"> Live</p>
+                  </div>
+                )}
+
+                {videos[currentIndex] && videos[currentIndex].video && (
+                  <div className="p-5 bg-[#18181B]">
+                    {' '}
+                    <div className="flex items-start space-x-3 text-xs ">
+                      <Image
+                        src={videos[currentIndex]?.video?.author.avatar[0].url}
+                        alt={`channel`}
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                      />
+
+                      <div className="w-40">
+                        <p className="font-semibold text-purple-400">
+                          {videos[currentIndex].video.author.title}
+                        </p>
+                        {videos[currentIndex]?.video.stats &&
+                          videos[currentIndex]?.video.stats?.viewers && (
+                            <span className="text-xs text-white">
+                              {getViewerEstimate(
+                                videos[currentIndex]?.video?.stats?.viewers
+                              )}{' '}
+                              viewers
+                            </span>
+                          )}
+                      </div>
+                    </div>
+                    <div className="my-2">
+                      {videos[currentIndex]?.video.badges.map((item, index) => (
+                        <span key={index} className="tags">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                    <div>
+                      <p className="w-40 min-w-full text-sm break-words">
+                        {videos[currentIndex]?.video.descriptionSnippet}
                       </p>
                     </div>
                   </div>
-                  <div className="my-2">
-                    {videos[currentIndex]?.video.badges.map((item, index) => (
-                      <span key={index} className="tags">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="w-32 text-sm">
-                      {videos[currentIndex]?.video.descriptionSnippet}
-                    </p>
-                  </div>
+                )}
+              </div>
+
+              {currentIndex !== videos.length - 1 && (
+                <div className="py-10">
+                  <LivePreview
+                    srcUrl={
+                      videos[currentIndex + 1]?.video?.movingThumbnails
+                        ? videos[currentIndex + 1]?.video?.movingThumbnails[0]
+                            .url
+                        : videos[currentIndex + 1]?.video?.thumbnails[0].url
+                    }
+                    alt={`${videos[currentIndex].video?.author.title} Channel`}
+                  />
                 </div>
               )}
             </div>
-            <span
-              onClick={() => setCurrentIndex(currentIndex + 1)}
-              className="flex items-center text-white break-words cursor-pointer w-28"
-            >
-              <Icon width={24} icon="material-symbols:chevron-right-rounded" />
-            </span>
+            <div className="flex items-center w-24">
+              {currentIndex !== videos.length - 1 && (
+                <span
+                  className="text-white rounded-md cursor-pointer hover:bg-gray-500"
+                  onClick={() => setCurrentIndex(currentIndex + 1)}
+                >
+                  <Icon
+                    width={30}
+                    icon="material-symbols:chevron-right-rounded"
+                  />
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
