@@ -39,7 +39,7 @@ const SearchPage = () => {
   };
   useEffect(() => {
     fetchVideos();
-  }, []);
+  }, [query]);
   return (
     <div className="categoriestab">
       <CategoryHeader

@@ -10,7 +10,7 @@ interface Props {
 const LivePreview = ({
   srcUrl = '',
   width = 100,
-  height = 300,
+  height = 200,
   alt = 'Live preview',
 }: Props) => {
   return <Image src={srcUrl} width={width} height={height} alt={alt} />;

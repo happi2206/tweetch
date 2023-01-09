@@ -9,9 +9,7 @@ interface Props {
   videos: videointerface[];
 }
 const VideoCarousel = ({ fetching, videos }: Props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const getSlide = () => {};
+  const [currentIndex, setCurrentIndex] = useState(3);
 
   const getViewerEstimate = (viewer: string | undefined) => {
     if (viewer) {
@@ -22,9 +20,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
     }
     return;
   };
-  useEffect(() => {
-    console.log(videos);
-  }, []);
+
   return (
     <div className="px-8 my-20">
       <div className="m-auto ">
@@ -47,40 +43,42 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
             </div>
 
             <div className="flex">
-              {currentIndex !== 0 && (
-                <div className="py-10">
-                  <LivePreview
-                    srcUrl={
-                      videos[currentIndex - 1]?.video?.movingThumbnails
-                        ? videos[currentIndex - 1]?.video?.movingThumbnails[0]
-                            .url
-                        : videos[currentIndex - 1]?.video?.thumbnails[0].url
-                    }
-                    alt={`${videos[currentIndex].video?.author.title} Channel`}
-                  />
-                </div>
-              )}
-              {/* <div>
-              {JSON.stringify(videos[currentIndex]?.video.stats?.viewers)}
-            </div> */}
-              <div className="relative flex">
-                <LivePreview
-                  srcUrl={
-                    videos[currentIndex]?.video?.movingThumbnails
-                      ? videos[currentIndex]?.video?.movingThumbnails[0].url
-                      : videos[currentIndex]?.video?.thumbnails[0].url
-                  }
-                  width={600}
-                  height={300}
-                  alt={`${videos[currentIndex].video?.author.title} Channel`}
-                />
-
-                {videos[currentIndex]?.video?.isLiveNow && (
-                  <div className="absolute text-xs px-1 py-0.5 font-semibold bg-red-600 rounded top-4 text-white left-4">
-                    <p className="uppercase"> Live</p>
+              {currentIndex !== 0 &&
+                videos[currentIndex] &&
+                videos[currentIndex].video && (
+                  <div className="py-10">
+                    <LivePreview
+                      srcUrl={
+                        videos[currentIndex - 1]?.video?.movingThumbnails
+                          ? videos[currentIndex - 1]?.video?.movingThumbnails[0]
+                              .url
+                          : videos[currentIndex - 1]?.video?.thumbnails[0].url
+                      }
+                      alt={`${videos[currentIndex].video?.author.title} Channel`}
+                    />
                   </div>
                 )}
 
+              <div className="relative flex">
+                {videos[currentIndex] && videos[currentIndex].video && (
+                  <LivePreview
+                    srcUrl={
+                      videos[currentIndex]?.video?.movingThumbnails
+                        ? videos[currentIndex]?.video?.movingThumbnails[0].url
+                        : videos[currentIndex]?.video?.thumbnails[0].url
+                    }
+                    width={600}
+                    height={200}
+                    alt={`${videos[currentIndex].video?.author.title} Channel`}
+                  />
+                )}
+                {videos[currentIndex] &&
+                  videos[currentIndex].video &&
+                  videos[currentIndex]?.video?.isLiveNow && (
+                    <div className="absolute text-xs px-1 py-0.5 font-semibold bg-red-600 rounded top-4 text-white left-4">
+                      <p className="uppercase"> Live</p>
+                    </div>
+                  )}
                 {videos[currentIndex] && videos[currentIndex].video && (
                   <div className="p-5 bg-[#18181B]">
                     {' '}
@@ -108,7 +106,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
                           )}
                       </div>
                     </div>
-                    <div className="my-2">
+                    <div className="my-2 space-x-3">
                       {videos[currentIndex]?.video.badges.map((item, index) => (
                         <span key={index} className="tags">
                           {item}
@@ -124,20 +122,23 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
                 )}
               </div>
 
-              {currentIndex !== videos.length - 1 && (
-                <div className="py-10">
-                  <LivePreview
-                    srcUrl={
-                      videos[currentIndex + 1]?.video?.movingThumbnails
-                        ? videos[currentIndex + 1]?.video?.movingThumbnails[0]
-                            .url
-                        : videos[currentIndex + 1]?.video?.thumbnails[0].url
-                    }
-                    alt={`${videos[currentIndex].video?.author.title} Channel`}
-                  />
-                </div>
-              )}
+              {currentIndex !== videos.length - 1 &&
+                videos[currentIndex] &&
+                videos[currentIndex].video && (
+                  <div className="py-10">
+                    <LivePreview
+                      srcUrl={
+                        videos[currentIndex + 1]?.video?.movingThumbnails
+                          ? videos[currentIndex + 1]?.video?.movingThumbnails[0]
+                              .url
+                          : videos[currentIndex + 1]?.video?.thumbnails[0].url
+                      }
+                      alt={`${videos[currentIndex].video?.author.title} Channel`}
+                    />
+                  </div>
+                )}
             </div>
+
             <div className="flex items-center w-24">
               {currentIndex !== videos.length - 1 && (
                 <span
