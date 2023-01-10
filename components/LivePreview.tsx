@@ -13,7 +13,15 @@ const LivePreview = ({
   height = 200,
   alt = 'Live preview',
 }: Props) => {
-  return <Image src={srcUrl} width={width} height={height} alt={alt} />;
+  return (
+    <Image
+      src={srcUrl}
+      width={width}
+      height={height}
+      alt={alt}
+      className="w-full"
+    />
+  );
 };
 
 export default LivePreview;

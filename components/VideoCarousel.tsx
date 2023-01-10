@@ -42,7 +42,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
               )}
             </div>
 
-            <div className="flex">
+            <div className="flex items-center">
               {currentIndex !== 0 &&
                 videos[currentIndex] &&
                 videos[currentIndex].video && (
@@ -59,7 +59,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
                   </div>
                 )}
 
-              <div className="relative flex">
+              <div className="relative flex flex-col md:flex-row">
                 {videos[currentIndex] && videos[currentIndex].video && (
                   <LivePreview
                     srcUrl={
@@ -80,7 +80,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
                     </div>
                   )}
                 {videos[currentIndex] && videos[currentIndex].video && (
-                  <div className="p-5 bg-[#18181B]">
+                  <div className="p-5  bg-[#18181B] md:w-auto w-full">
                     {' '}
                     <div className="flex items-start space-x-3 text-xs ">
                       <Image
@@ -91,7 +91,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
                         className="rounded-full"
                       />
 
-                      <div className="w-40">
+                      <div className="w-24 md:w-40">
                         <p className="font-semibold text-purple-400">
                           {videos[currentIndex].video.author.title}
                         </p>
