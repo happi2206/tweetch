@@ -42,7 +42,7 @@ const VideoCarousel = ({ fetching, videos }: Props) => {
               )}
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center md:items-stretch">
               {currentIndex !== 0 &&
                 videos[currentIndex] &&
                 videos[currentIndex].video && (
